@@ -1,0 +1,17 @@
+body.body-editar{
+    color: white;
+    background-color: black;
+    width: 50%;
+    margin-left: 25vw;
+    text-align: center;
+}
+button.editar{
+    width: 50vw;
+    background-color: rgb(177, 196, 177);
+    color: rgb(5, 5, 5);
+}
+button.regresar{
+    width: 50vw;
+    background-color: rgb(238, 21, 35);
+    color: white;
+}

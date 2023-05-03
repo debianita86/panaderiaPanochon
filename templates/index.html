@@ -1,0 +1,180 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title> Panaderia El Panochón </title>
+</head>
+
+<body style="background-color: black;">
+    <nav class="body-panaderia">
+        <nav class="row barra-menu">
+            <nav class="col-sm-1"></nav>
+            <nav class="col-sm-9">
+                <h1 class="titulo"> Bienvenido a la panadería EL PANOCHÓN</h1>
+            </nav>
+            <nav class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        Menú
+                    </button>
+                    <div class="dropdown-menu">
+                        <label class="dropdown-item" onclick="crear_producto()">
+                            Insertar producto
+                        </label>
+                        <label class="dropdown-item" onclick="mostrar_producto()">
+                            Mostrar productos
+                        </label>
+                        <label class="dropdown-item" onclick="home()">
+                            Home
+                        </label>
+
+                    </div>
+
+                </div>
+            </nav>
+        </nav>
+
+
+        <nav class="row carrusel" id="carrusel">
+            <nav class="col-sm-2"></nav>
+            <nav class="col-sm-8">
+                <!-- Carousel -->
+                <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+                    <!-- Indicators/dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                    </div>
+
+                    <!-- The slideshow/carousel -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Y0yJQ-VbUFgG0I99sSe1jAHaFB%26pid%3DApi&f=1&ipt=c7086205653592984154a832647f3141824223e0e9d3cd74bd115c4329d3f4b6&ipo=images"
+                                alt="Los Angeles" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.WeHJ-duRat5Yonsr1ZJm9AHaE8%26pid%3DApi&f=1&ipt=6c5315555a7feacf4d026383143d91a767b3ecf8db8bfca3e1b68f00d98f6d95&ipo=images"
+                                alt="Chicago" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.9pMguU2ro-3v2VjPW7hkHQHaE8%26pid%3DApi&f=1&ipt=e55ce9e7102e25fa9163ac7ea494e334204db148863a41636ff8652516396c80&ipo=images"
+                                alt="New York" class="d-block w-100">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls/icons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </nav>
+            <nav class="col-sm-2"></nav>
+        </nav>
+
+        <div class="row agregar-producto" style="display: none;" id="agregar-producto">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-8">
+
+                <h2 class="label-agregar-producto"> Agregar productos </h2>
+
+                <form method="post">
+                    <div class="mb-3 mt-3">
+                        <label for="nombre" class="form-label">
+                            Nombre
+                        </label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese Nombre Producto">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                    <label for="precio" class="form-label">
+                        Precio
+                    </label>
+                    <input type="number" id="precio" name="precio" class="form-control" placeholder="Ingrese Valor Producto">
+                </div>
+
+                <div class="form-check mb-3">
+                    <label for="stock" class="form-check-label">
+                        Disponibilidad
+                    </label>
+                    <input type="checkbox" id="stock" class="form-check-input" name="stock">
+                </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Agregar Producto
+                    </button>
+                </form>
+
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+
+
+        <div class="row mostrar-producto" id="mostrar-producto" style="display: none;">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-7">
+                <h3 class="label-mostrar-producto"> El pan más rico del barrio </h3>
+                <table class="tabla-productos">
+                    <tr class="fila1">
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+                    {% for item in results %}
+                    <tr>
+                        <td> {{ item[0] }} </td>
+                        <td> {{ item[1] }} </td>
+                        <td> {{ item[2] }} </td>
+                        <td> {{ item[3] }} </td>
+                        <td>
+                            <form action="{{url_for('guardar_edicion', id=item[0])}}" method="get"
+                                style="display:inline;">
+
+                                <input type="submit" value="Editar" class="btn btn-success">
+                            </form>
+
+                            <form action="{{url_for('eliminar_producto', id=item[0])}}" method="get"
+                                style="display:inline;">
+
+                                <input type="submit" value="Eliminar" class="btn btn-danger">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </nav>
+
+    <nav class="row piePagina">
+        <nav class="col-sm-1"></nav>
+        <nav class="col-sm-6">
+            <h1>Puedes contactarnos en: </h1>
+        </nav>
+        <nav class="col-sm-5">
+            <h2 style="color: yellow;text-decoration: underline;">aparra@institutoi3.edu.co</h2>
+        </nav>
+    </nav>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/index.js')}}">
+
+    </script>
+</body>
+
+</html>
